@@ -29,18 +29,22 @@ func GetTxCmd() *cobra.Command {
 		SuggestionsMinimumDistance: 2,
 		RunE:                       client.ValidateCmd,
 	}
-    
+
 	cmd.AddCommand(CmdCreatePost())
 	// this line is used by starport scaffolding # 1
+
+	cmd.AddCommand(CmdCreateComment())
+	cmd.AddCommand(CmdUpdateComment())
+	cmd.AddCommand(CmdDeleteComment())
 
 	return cmd
 }
 
 func CmdCreatePost() *cobra.Command {
 	cmd := &cobra.Command{
-		Use: "create-post [title] [body]",
+		Use:   "create-post [title] [body]",
 		Short: "Creates a new post",
-		Args: cobra.ExactArgs(2),
+		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			argsTitle := string(args[0])
 			argsBody := string(args[1])
